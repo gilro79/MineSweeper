@@ -33,9 +33,10 @@ img {
     margin: 20px;
 }
 .resetBtn{
-    width:20px;
-    height:20px;
+    /* width:25px; */
+    height:30px;
     margin: 20px;
+    text-align: left;
     background-color: rgb(160, 160, 160);
 }
 .frame{

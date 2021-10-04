@@ -9,7 +9,6 @@
 
 <body onkeyup="handleKey(event)" onload="initGame()">
     <h1>Mine Sweeper</h1>
-    <div class="new-game" onclick="newGame()">New game</div>
     <div class="level">
         <input type="radio" id="Beginner" name="drone" value="Beginner" checked onclick="gameLevel(this)">
         <label for="Beginner">Beginner</label>
@@ -20,7 +19,7 @@
     </div>
     <div class="gameTime">time: 0</div>
     <div class="frame">
-        <button class="resetBtn" onclick="resetGame()"></button>
+        <button class="resetBtn" onclick="initGame()">🙂</button>
         <table>
             <tbody class="board"></tbody>
         </table>
