@@ -32,3 +32,17 @@ img {
 .level{
     margin: 20px;
 }
+.resetBtn{
+    width:20px;
+    height:20px;
+    margin: 20px;
+    background-color: rgb(160, 160, 160);
+}
+.frame{
+    /* border: 1px solid rgb(160, 160, 160);
+    width: 300px;
+    height: 500; */
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px;
+}

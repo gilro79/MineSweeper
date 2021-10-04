@@ -19,10 +19,12 @@
         <label for="Expert">Expert</label>
     </div>
     <div class="gameTime">time: 0</div>
-    <table>
-    <!-- <table oncontextmenu="rightButton(event,this)"> -->
-        <tbody class="board"></tbody>
-    </table>
+    <div class="frame">
+        <button class="resetBtn" onclick="resetGame()"></button>
+        <table>
+            <tbody class="board"></tbody>
+        </table>
+    </div>
     <script src="js/util.js"></script>
     <script src="js/app.js"></script>
 </body>

@@ -152,13 +152,19 @@ function rightButton(ev, el) {
     var id = el.id;
     var pos = getPosFromId(id);
     var currCell = gBoard[pos.i][pos.j];
-    if(currCell.isShown) return;
+    if (currCell.isShown) return;
     if (currCell.isMarked) {
         currCell.isMarked = false;
+        gGame.markedCount -= 1;
         el.innerHTML = '';
+        console.log('gGame.markedCount', gGame.markedCount)
+
     } else {
         currCell.isMarked = true;
+        gGame.markedCount += 1;
         el.innerHTML = FLAG_IMG;
+        console.log('gGame.markedCount', gGame.markedCount)
+        if(gGame.shownCount + gGame.markedCount + gGame.minesRevealed === gLevel.size ** 2) victory();
     }
 
 }
@@ -169,12 +175,12 @@ function clicked(elCell) {
         gStartTime = Date.now();
         gTimeInterval = setInterval(calcTime, 200);
     }
-    
+
     var cellId = elCell.id;
     var pos = getPosFromId(cellId);
     var currCell = gBoard[pos.i][pos.j];
     // if the cell is flagged
-    if(currCell.isMarked) return;
+    if (currCell.isMarked || currCell.isShown) return;
     currCell.isShown = true;
     if (currCell.isMine) {
         elCell.innerHTML = MINE_IMG;
@@ -191,6 +197,10 @@ function clicked(elCell) {
             openNeigbCells(+pos.i, +pos.j);
         }
     }
+    console.log('gGame.shownCount', gGame.shownCount)
+    console.log('gGame.markedCount', gGame.markedCount)
+    console.log('gGame.minesRevealed', gGame.minesRevealed)
+    if(gGame.shownCount + gGame.markedCount + gGame.minesRevealed === gLevel.size ** 2) victory();
 }
 
 function setMinesCount() {
@@ -227,17 +237,8 @@ function openNeigbCells(rowIdx, colIdx) {
             var cellId = getIdName({ i: i, j: j })
             var elCell = document.querySelector('#' + cellId);
             var currCell = gBoard[i][j];
+            // Recursion
             if (!currCell.isShown) clicked(elCell);
-            // currCell.isShown = true;
-            // console.log(currCell);
-            // console.log(i, j);
-            // gGame.minesRevealed += 1;
-            // elCell.classList.add('shown');
-            // if (currCell.minesAroundCount) {
-            //     elCell.innerText = currCell.minesAroundCount;
-            // }else{
-            //     if(!currCell.isShown) openNeigbCells(i, j);
-            // }
         }
     }
 }
