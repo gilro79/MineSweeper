@@ -3,10 +3,12 @@
 var SMILEY = '🙂';
 var COOL = '😎';
 var MAYBE = '😯';
+var INJURED = '😵';
 var DEAD = '😖';
 
 var MINE_IMG = '<img src="img/bomb.png" />';
 var FLAG_IMG = '<img src="img/flag.png" />';
+
 var gBoard = [];
 var gStartTime;
 var gTimeInterval;
@@ -17,21 +19,24 @@ var gLevel = {
 var gLevels = [{ s: 4, m: 2 }, { s: 8, m: 12 }, { s: 12, m: 30 }];
 var gGame;
 
-
-
-
 function initGame() {
     gGame = {
         isOn: false,
         shownCount: 0,
         markedCount: 0,
         timePassed: 0,
-        minesRevealed: 0
+        minesRevealed: 0,
+        isHint: false,
+        hintsCount: 3
     }
     renderCell('.resetBtn', SMILEY);
     clearInterval(gTimeInterval);
     resetTime();
     buildBoard();
+    renderCellTxt('.liveLeft span','3 LIVES')
+    // var elLives = document.querySelector('.liveLeft span');
+    // elLives.innerText = '3 LIVES';
+
 }
 
 function gameLevel(elRadioBtn) {
@@ -60,8 +65,6 @@ function buildBoard() {
     // setMinesCount();
     renderBoard();
 }
-
-
 
 // Render the board to an HTML table
 function renderBoard() {
@@ -145,17 +148,27 @@ function clicked(elCell) {
         initCells(pos.i, pos.j);
         setMinesCount();
     }
+    if(gGame.isHint){
+        gGame.isHint = false;
+        showHint(pos);
+        return;
+    }
     var currCell = gBoard[pos.i][pos.j];
     // if the cell is flagged
     if (currCell.isMarked || currCell.isShown) return;
     currCell.isShown = true;
     if (currCell.isMine) {
         elCell.innerHTML = MINE_IMG;
+        renderCell('.resetBtn', INJURED);
         gGame.minesRevealed += 1;
+        var livesLeft = 3 - gGame.minesRevealed;
+        var livesLeftTxt = (livesLeft === 1) ? livesLeft + ' LIFE' : livesLeft + ' LIVES';
+        renderCellTxt('.liveLeft span',livesLeftTxt)
         if (gGame.minesRevealed === 3) {
             gameOver()
         }
     } else {
+        renderCell('.resetBtn', SMILEY);
         elCell.classList.add('shown');
         gGame.shownCount += 1;
         if (currCell.minesAroundCount) {
@@ -219,6 +232,13 @@ function initCells(rowIdx, colIdx) {
     }
 }
 
+function getHint(){
+    gGame.isHint = true;
+}
+function showHint(pos){
+    console.log(pos);
+}
+
 function setMinesCount() {
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard.length; j++) {
@@ -275,9 +295,6 @@ function openNeigbCells(rowIdx, colIdx) {
     }
 }
 
-function renderCell(el, value) {
-    var elBtn = document.querySelector(el);
-    elBtn.innerHTML = value;
-}
+
 
 

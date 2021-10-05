@@ -44,3 +44,13 @@ function createRandArray(size) {
     }
     return shuffNums;
 }
+
+function renderCell(el, value) {
+    var elBtn = document.querySelector(el);
+    elBtn.innerHTML = value;
+}
+
+function renderCellTxt(el, value){
+    var elBtn = document.querySelector(el);
+    elBtn.innerText = value;
+}

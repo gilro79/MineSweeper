@@ -32,6 +32,18 @@ img {
 .level{
     margin: 20px;
 }
+.gameTime{
+    display: inline-block;
+    margin-right: 40px;
+    /* padding: 3px;
+    width: 60px;
+    background-color: rgb(218, 218, 218);
+    color: rgb(41, 58, 207); */
+}
+.liveLeft{
+    display: inline-block;
+
+}
 .resetBtn{
     /* width:25px; */
     height:30px;
@@ -46,4 +58,11 @@ img {
     margin: auto;
     margin-top: 10px;
     padding: 10px;
+}
+.hints{
+    margin-top: 20px;
+}
+.footer{
+    margin-top: 20px;
+    font-size: 20px;
 }
