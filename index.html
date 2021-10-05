@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body onkeyup="handleKey(event)" onload="initGame()">
+<body onload="initGame()">
     <h1>Mine Sweeper</h1>
     <div class="level">
-        <input type="radio" id="Beginner" name="drone" value="Beginner" checked onclick="gameLevel(this)">
+        <input type="radio" id="Beginner" name="MS" value="Beginner" checked onclick="gameLevel(this)">
         <label for="Beginner">Beginner</label>
-        <input type="radio" id="medium" onclick="gameLevel(this)" name="drone" value="medium">
+        <input type="radio" id="medium" onclick="gameLevel(this)" name="MS" value="medium">
         <label for="medium">Medium</label>
-        <input type="radio" id="Expert" onclick="gameLevel(this)" name="drone" value="Expert">
+        <input type="radio" id="Expert" onclick="gameLevel(this)" name="MS" value="Expert">
         <label for="Expert">Expert</label>
     </div>
     <div class="frame">
@@ -26,11 +26,27 @@
         <table>
             <tbody class="board"></tbody>
         </table>
-        <div class="hints" onclick="getHint()">HINTS 
-            <span class="hint1"> 1</span>
-            <span class="hint2"> 2</span>
-            <span class="hint3"> 3</span>
+        <div class="hints" onclick="getHint()">HINTS
+            <span class="hint1"> 💡</span>
+            <span class="hint2"> 💡</span>
+            <span class="hint3"> 💡</span>
         </div>
+    </div>
+    <div class="records">
+        records table:<br><br>
+        Beginner:<br>
+        name: <span class="size-4-record-name">NA</span>, 
+        time: <span class="size-4-record-time">NA</span>.
+        <br>
+        <br>
+        medium:<br>
+        name: <span class="size-8-record-name">NA</span>, 
+        time: <span class="size-8-record-time">NA</span>.
+        <br>
+        <br>
+        Expert:<br>
+        name: <span class="size-12-record-name">NA</span>, 
+        time: <span class="size-12-record-time">NA</span>.
     </div>
     <div class="footer">Created by Roy Gil</div>
     <script src="js/util.js"></script>

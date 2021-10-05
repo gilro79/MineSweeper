@@ -5,6 +5,7 @@ body {
 }
 table {
     margin: auto;
+    cursor: default;
 }
 
 td {
@@ -60,11 +61,25 @@ img {
     padding: 10px;
 }
 .hints{
+    cursor: default;
+    margin: auto;
     margin-top: 20px;
+    background-color: rgba(128, 255, 0, 0.466);
+    width: 150px;
+    padding: 4px;
+    border-radius: 10px;
 }
 .showHint{
     background-color: rgb(182, 255, 140);
     color: black;
+}
+.records{
+    margin-top: 10px;
+    margin: auto;
+    text-align: left;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 5px;
 }
 .footer{
     margin-top: 20px;
