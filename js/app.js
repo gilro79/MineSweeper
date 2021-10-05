@@ -37,9 +37,9 @@ function initGame() {
         minesRevealed: 0,
         isHint: false,
         hintsCount: 0,
-        
         safeClickCount: 0,
-        manuelMineCount: 0
+        manuelMineCount: 0,
+        isEnd: false
     }
     gManualMineLocations = [];
     gMarkedNumber = 0;
@@ -124,6 +124,7 @@ function resetTime() {
 function gameOver() {
     clearInterval(gTimeInterval);
     renderCell('.resetBtn', DEAD);
+    gGame.isEnd = true;
     // revealing all mines:
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard.length; j++) {
@@ -148,12 +149,13 @@ function victory() {
     } else if (isRecord < gBestScores[gLevel.name][1]) {
         setNewRecord(isRecord);
     }
+    gGame.isEnd = true;
 }
 
 function setNewRecord(isRecord) {
     var bestName = prompt('You set a new record! what is your name?');
-    if(!bestName) bestName = (Math.random() > 0.5)? 'John Doe' : 'Jane Doe'; //  (:
-    
+    if (!bestName) bestName = (Math.random() > 0.5) ? 'John Doe' : 'Jane Doe'; //  (:
+
     gBestScores[gLevel.name] = [];
     gBestScores[gLevel.name][0] = bestName;
     gBestScores[gLevel.name][1] = isRecord;
@@ -166,6 +168,7 @@ function setNewRecord(isRecord) {
 }
 
 function clicked(elCell) {
+    if(gGame.isEnd) return;
     var cellId = elCell.id;
     var pos = getPosFromId(cellId);
     if (gIsManualMode) {
@@ -219,6 +222,7 @@ function clicked(elCell) {
 
 function rightButton(ev, el) {
     ev.preventDefault();
+    if(gGame.isEnd) return;
     var id = el.id;
     var pos = getPosFromId(id);
     var currCell = gBoard[pos.i][pos.j];
