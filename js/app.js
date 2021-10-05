@@ -15,14 +15,17 @@ var FLAG_IMG = '<img src="img/flag.png" />';
 
 var gBoard = [];
 var gStartTime;
+var gBestScores = {}
 var gTimeInterval;
 var gIsManualMode = false;
+var gManualMineLocations;
 var gMarkedNumber = 0;
 var gLevel = {
     size: 4,
-    mines: 2
+    mines: 2,
+    name: 'begginer'
 };
-var gLevels = [{ s: 4, m: 2 }, { s: 8, m: 12 }, { s: 12, m: 30 }];
+var gLevels = [{ s: 4, m: 2, n: 'begginer' }, { s: 8, m: 12, n: 'medium' }, { s: 12, m: 30, n: 'expert' }];
 var gGame;
 
 function initGame() {
@@ -34,10 +37,11 @@ function initGame() {
         minesRevealed: 0,
         isHint: false,
         hintsCount: 0,
-        bestScores: {},
+        
         safeClickCount: 0,
-
+        manuelMineCount: 0
     }
+    gManualMineLocations = [];
     gMarkedNumber = 0;
     renderCell('.resetBtn', SMILEY);
     clearInterval(gTimeInterval);
@@ -56,14 +60,17 @@ function gameLevel(elRadioBtn) {
         case 'Beginner':
             gLevel.size = gLevels[0].s;
             gLevel.mines = gLevels[0].m;
+            gLevel.name = gLevels[0].n;
             break;
         case 'medium':
             gLevel.size = gLevels[1].s;
             gLevel.mines = gLevels[1].m;
+            gLevel.name = gLevels[1].n;
             break;
         case 'Expert':
             gLevel.size = gLevels[2].s;
             gLevel.mines = gLevels[2].m;
+            gLevel.name = gLevels[2].n;
             break;
     }
     initGame();
@@ -135,42 +142,44 @@ function victory() {
     var isRecord = Math.floor((gFinishTime - gStartTime) / 1000);
     clearInterval(gTimeInterval);
     renderCell('.resetBtn', COOL);
-    if (!gGame.bestScores[gLevel.size]) {
+    // console.log('gGame.bestScores', gGame.bestScores);
+    // console.log('gGame.bestScores[gLevel.name]', gGame.bestScores[gLevel.name]);
+    // console.log('gGame.bestScores[gLevel.name][1]', gGame.bestScores[gLevel.name][1]);
+    console.log('isRecord', isRecord);
+    if (!gBestScores[gLevel.name]) {
+        console.log('no record')
         setNewRecord(isRecord);
-    } else if (isRecord < gBest[gLevel.size][1]) {
+    } else if (isRecord < gBestScores[gLevel.name][1]) {
         setNewRecord(isRecord);
     }
 }
 
 function setNewRecord(isRecord) {
     var bestName = prompt('You set a new record! what is your name?');
-    gGame.bestScores[gLevel.size] = [];
-    gGame.bestScores[gLevel.size][0] = bestName;
-    gGame.bestScores[gLevel.size][1] = isRecord;
-    var nameClass = `.size-${gLevel.size}-record-name`;
-    var timeClass = `.size-${gLevel.size}-record-time`;
+    gBestScores[gLevel.name] = [];
+    gBestScores[gLevel.name][0] = bestName;
+    gBestScores[gLevel.name][1] = isRecord;
+    var nameClass = `.size-${gLevel.name}-record-name`;
+    var timeClass = `.size-${gLevel.name}-record-time`;
     var elRecordName = document.querySelector(nameClass);
     var elRecordTime = document.querySelector(timeClass);
-    elRecordName.innerText = gGame.bestScores[gLevel.size][0];
-    elRecordTime.innerText = gGame.bestScores[gLevel.size][1];
+    elRecordName.innerText = gBestScores[gLevel.name][0];
+    elRecordTime.innerText = gBestScores[gLevel.name][1];
 }
 
 function clicked(elCell) {
     var cellId = elCell.id;
     var pos = getPosFromId(cellId);
+    if (gIsManualMode) {
+        insertMines(elCell);
+        return;
+    }
     if (!gGame.isOn) {
         gGame.isOn = true;
         gStartTime = Date.now();
         gTimeInterval = setInterval(calcTime, 200);
-        if (!gIsManualMode) {
-            initCells(pos.i, pos.j);
-            setMinesCount();
-        } else {
-            console.log('Manual');
-            initCells();
-            insertMines(elCell);
-            return;
-        }
+        initCells(pos.i, pos.j);
+        setMinesCount();
     }
     var currCell = gBoard[pos.i][pos.j];
     if (currCell.isMarked || currCell.isShown) {
@@ -206,7 +215,7 @@ function clicked(elCell) {
         }
     }
     if (gGame.shownCount + gGame.markedCount + gGame.minesRevealed === gLevel.size ** 2 && !gMarkedNumber) {
-        victory();
+        setTimeout(victory, 10);
     }
 }
 
@@ -231,7 +240,7 @@ function rightButton(ev, el) {
             gMarkedNumber++;
         }
         if (gGame.shownCount + gGame.markedCount + gGame.minesRevealed === gLevel.size ** 2 && !gMarkedNumber) {
-            victory();
+            setTimeout(victory, 10);
         }
     }
 }
@@ -341,14 +350,33 @@ function safeClick() {
 function setMinesManual() {
     gIsManualMode = true;
     initGame();
-    gIsManualMode = false;
+    initCells();
+    // gIsManualMode = false;
 }
 
 function insertMines(elCell) {
-    for (var i = 1; i < gLevel.mines; i++) {
-        var cellId = elCell.id;
-        var pos = getPosFromId(cellId);
-        
+    var cellId = elCell.id;
+    var pos = getPosFromId(cellId);
+    var currCell = gBoard[+pos.i][+pos.j];
+    gGame.manuelMineCount++;
+    // Model:
+    currCell.isMine = true;
+    // DOM:
+    elCell.innerHTML = MINE_IMG;
+    gManualMineLocations.push(pos);
+
+    if (gGame.manuelMineCount === gLevel.mines) {
+        gGame.isOn = true;
+        gIsManualMode = false;
+        setMinesCount();
+        setTimeout(function () {
+            for (var i = 0; i < gManualMineLocations.length; i++) {
+                var cellId = '#' + getIdName(gManualMineLocations[i]);
+                renderCell(cellId, '');
+            }
+            gStartTime = Date.now();
+            gTimeInterval = setInterval(calcTime, 200);
+        }, 1000)
     }
 }
 
