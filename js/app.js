@@ -50,6 +50,7 @@ function initGame() {
     renderCellTxt('.liveLeft span', '3 LIVES')
     resetElements('.hints span', HINT);
     resetElements('.safe-click span', SAFE_CLICK);
+    renderCellTxt('.mine-number', gLevel.mines);
     // var elLives = document.querySelector('.liveLeft span');
     // elLives.innerText = '3 LIVES';
 
@@ -142,12 +143,7 @@ function victory() {
     var isRecord = Math.floor((gFinishTime - gStartTime) / 1000);
     clearInterval(gTimeInterval);
     renderCell('.resetBtn', COOL);
-    // console.log('gGame.bestScores', gGame.bestScores);
-    // console.log('gGame.bestScores[gLevel.name]', gGame.bestScores[gLevel.name]);
-    // console.log('gGame.bestScores[gLevel.name][1]', gGame.bestScores[gLevel.name][1]);
-    console.log('isRecord', isRecord);
     if (!gBestScores[gLevel.name]) {
-        console.log('no record')
         setNewRecord(isRecord);
     } else if (isRecord < gBestScores[gLevel.name][1]) {
         setNewRecord(isRecord);
@@ -156,6 +152,8 @@ function victory() {
 
 function setNewRecord(isRecord) {
     var bestName = prompt('You set a new record! what is your name?');
+    if(!bestName) bestName = (Math.random() > 0.5)? 'John Doe' : 'Jane Doe'; //  (:
+    
     gBestScores[gLevel.name] = [];
     gBestScores[gLevel.name][0] = bestName;
     gBestScores[gLevel.name][1] = isRecord;
@@ -351,7 +349,6 @@ function setMinesManual() {
     gIsManualMode = true;
     initGame();
     initCells();
-    // gIsManualMode = false;
 }
 
 function insertMines(elCell) {
@@ -364,7 +361,7 @@ function insertMines(elCell) {
     // DOM:
     elCell.innerHTML = MINE_IMG;
     gManualMineLocations.push(pos);
-
+    renderCellTxt('.mine-number', gLevel.mines - gGame.manuelMineCount);
     if (gGame.manuelMineCount === gLevel.mines) {
         gGame.isOn = true;
         gIsManualMode = false;
@@ -374,6 +371,7 @@ function insertMines(elCell) {
                 var cellId = '#' + getIdName(gManualMineLocations[i]);
                 renderCell(cellId, '');
             }
+            renderCell('.mine-number', 'Go');
             gStartTime = Date.now();
             gTimeInterval = setInterval(calcTime, 200);
         }, 1000)
