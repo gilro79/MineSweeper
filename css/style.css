@@ -52,6 +52,10 @@ img {
     text-align: left;
     background-color: rgb(160, 160, 160);
 }
+.resetBtn:hover{
+    cursor: pointer;
+    background-color: rgb(221, 221, 221);
+}
 .frame{
     /* border: 1px solid rgb(160, 160, 160);
     width: 300px;
@@ -69,9 +73,44 @@ img {
     padding: 4px;
     border-radius: 10px;
 }
+.hints:hover{
+    cursor: pointer;
+    background-color: rgba(217, 255, 0, 0.466);
+
+}
+.safe-click{
+    cursor: default;
+    margin: auto;
+    margin-top: 20px;
+    background-color: rgba(109, 128, 241, 0.466);
+    width: 150px;
+    padding: 4px;
+    border-radius: 10px;
+}
+.safe-click:hover{
+    background-color: rgba(148, 163, 245, 0.466);
+    cursor: pointer;
+}
+
+.manual-mode{
+    cursor: default;
+    margin: auto;
+    margin-top: 20px;
+    background-color: rgba(230, 11, 11, 0.815);
+    width: 150px;
+    padding: 4px;
+    border-radius: 10px;
+}
+.manual-mode:hover{
+    cursor: pointer;
+    background-color: rgba(228, 68, 68, 0.815);
+}
 .showHint{
     background-color: rgb(182, 255, 140);
     color: black;
+}
+.show-safe{
+    background-color: cornflowerblue;
 }
 .records{
     margin-top: 10px;

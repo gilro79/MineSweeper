@@ -26,27 +26,33 @@
         <table>
             <tbody class="board"></tbody>
         </table>
-        <div class="hints" onclick="getHint()">HINTS
+        <div class="hints" onclick="getHint()" title="Click me to see what's underneath nine cells!">HINTS
             <span class="hint1"> 💡</span>
             <span class="hint2"> 💡</span>
             <span class="hint3"> 💡</span>
         </div>
+        <div class="safe-click" onclick="safeClick()" title="Click me and I will show you a safe haven!">Safe Click
+            <span class="click1"> ❕</span>
+            <span class="click2"> ❕</span>
+            <span class="click3"> ❕</span>
+        </div>
+        <div class="manual-mode" onclick="setMinesManual()" title="Click me to set your own mines!">Manual Mines <span class="mine-number">(2)</span></div>
     </div>
     <div class="records">
         records table:<br><br>
         Beginner:<br>
         name: <span class="size-4-record-name">NA</span>, 
-        time: <span class="size-4-record-time">NA</span>.
+        time: <span class="size-4-record-time">NA</span> sec
         <br>
         <br>
         medium:<br>
         name: <span class="size-8-record-name">NA</span>, 
-        time: <span class="size-8-record-time">NA</span>.
+        time: <span class="size-8-record-time">NA</span> sec
         <br>
         <br>
         Expert:<br>
         name: <span class="size-12-record-name">NA</span>, 
-        time: <span class="size-12-record-time">NA</span>.
+        time: <span class="size-12-record-time">NA</span> sec
     </div>
     <div class="footer">Created by Roy Gil</div>
     <script src="js/util.js"></script>
