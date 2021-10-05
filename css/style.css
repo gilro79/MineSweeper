@@ -62,6 +62,10 @@ img {
 .hints{
     margin-top: 20px;
 }
+.showHint{
+    background-color: rgb(182, 255, 140);
+    color: black;
+}
 .footer{
     margin-top: 20px;
     font-size: 20px;
