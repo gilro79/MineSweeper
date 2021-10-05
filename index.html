@@ -22,7 +22,7 @@
             <div class="gameTime">time: 0</div>
             <div class="liveLeft"><span>3 LIVES</span> LEFT</div>
         </div>
-        <button class="resetBtn" onclick="initGame()">🙂</button>
+        <button class="resetBtn" onclick="initGame()" title="Reset Button">🙂</button>
         <table>
             <tbody class="board"></tbody>
         </table>
@@ -39,22 +39,25 @@
         <div class="manual-mode" onclick="setMinesManual()" title="Click me to set your own mines!">Manual Mines (<span class="mine-number">2</span>)</div>
     </div>
     <div class="records">
-        records table:<br><br>
+        <b>records table:</b><br><br>
         Beginner:<br>
         name: <span class="size-begginer-record-name">NA</span>, 
         time: <span class="size-begginer-record-time">NA</span> sec
         <br>
+        <hr>
         <br>
         medium:<br>
         name: <span class="size-medium-record-name">NA</span>, 
         time: <span class="size-medium-record-time">NA</span> sec
         <br>
+        <hr>
         <br>
         Expert:<br>
         name: <span class="size-expert-record-name">NA</span>, 
         time: <span class="size-expert-record-time">NA</span> sec
+        <hr>
     </div>
-    <div class="footer">Created by Roy Gil</div>
+    <div class="footer">Created by Roy Gil ™</div>
     <script src="js/util.js"></script>
     <script src="js/app.js"></script>
 </body>
