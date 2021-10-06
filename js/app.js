@@ -416,7 +416,7 @@ function safeClick() {
 function setMinesManual() {
     gIsManualMode = true;
     initGame();
-    initCells();
+    // initCells();
 }
 
 function insertMines(elCell) {
@@ -440,8 +440,9 @@ function insertMines(elCell) {
                 renderCell(cellId, '');
             }
             renderCell('.mine-number', 'Go');
-            gStartTime = Date.now();
-            gTimeInterval = setInterval(calcTime, 200);
+            setTime();
+            // gStartTime = Date.now();
+            // gTimeInterval = setInterval(calcTime, 200);
             gIsManualMode = false;
         }, 1000)
     }
