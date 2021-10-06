@@ -171,11 +171,16 @@ function victory() {
     }
 }
 
+function setRecordFromStorage(){
+        
+    
+}
+
 function setNewRecord(isRecord) {
     var bestName = prompt('You set a new record! what is your name?');
     if (!bestName) bestName = (Math.random() > 0.5) ? 'John Doe' : 'Jane Doe'; //  (:
 
-    // localStorage.setItem('bestName',bestName);
+    // localStorage.setItem('bestName', bestName);
     // document.querySelector('.test').innerHTML = localStorage.getItem('bestName');
 
     gBestScores[gLevel.name] = [];

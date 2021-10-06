@@ -65,8 +65,8 @@ img {
     padding: 10px 40px;
     width: 60px;
     border-radius: 10px;
-    background-color: rgb(218, 218, 218);
-    color: rgb(41, 58, 207);
+    background-color: black;
+    /* color: rgb(41, 58, 207); */
 }
 .markedMines{
     display: inline-block;
@@ -74,7 +74,7 @@ img {
     padding: 10px 40px;
     width: fit-content;
     border-radius: 10px;
-    background-color: blue;
+    background-color: black;
 }
 .liveLeft{
     display: inline-block;
@@ -82,7 +82,7 @@ img {
     padding: 10px 40px;
     width: fit-content;
     border-radius: 10px;
-    background-color: coral;
+    background-color: black;
 
 }
 .resetBtn{
