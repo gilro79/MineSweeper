@@ -44,6 +44,7 @@ function initGame() {
     }
     gManualMineLocations = [];
     gMarkedNumber = 0;
+    setRecordFromStorage();
     renderCell('.resetBtn', SMILEY);
     clearInterval(gTimeInterval);
     resetTime();
@@ -53,9 +54,6 @@ function initGame() {
     resetElements('.hints span', HINT);
     resetElements('.safe-click span', SAFE_CLICK);
     renderCellTxt('.mine-number', gLevel.mines);
-    // var elLives = document.querySelector('.liveLeft span');
-    // elLives.innerText = '3 LIVES';
-
 }
 
 function resetGame() {
@@ -163,17 +161,34 @@ function victory() {
     clearInterval(gTimeInterval);
     renderCell('.resetBtn', COOL);
     if (!gBestScores[gLevel.name]) {
+        console.log('there is no record')
         // setTimeout(setNewRecord, 50, isRecord);   why this fun continue to run on the recursion if I use the setTimeOut here?... 
         setNewRecord(isRecord);
     } else if (isRecord < gBestScores[gLevel.name][1]) {
+        console.log('there is a record')
         // setTimeout(setNewRecord, 50, isRecord);
         setNewRecord(isRecord);
     }
 }
 
-function setRecordFromStorage(){
-        
-    
+function setRecordFromStorage() {
+    for (var i = 0; i < gLevels.length; i++) {
+        var name = gLevels[i].n + 'Name';
+        var time = gLevels[i].n + 'Time';
+        if (localStorage.getItem(name)) {
+            var nameClass = `.size-${gLevels[i].n}-record-name`;
+            var timeClass = `.size-${gLevels[i].n}-record-time`;
+            var elRecordName = document.querySelector(nameClass);
+            var elRecordTime = document.querySelector(timeClass);
+            var bestName = localStorage.getItem(name);
+            var bestTime = localStorage.getItem(time);
+            elRecordName.innerText = bestName;
+            elRecordTime.innerText = bestTime;
+            gBestScores[gLevels[i].n] = [];
+            gBestScores[gLevels[i].n][0] = bestName;
+            gBestScores[gLevels[i].n][1] = bestTime;
+        }
+    }
 }
 
 function setNewRecord(isRecord) {
@@ -182,6 +197,9 @@ function setNewRecord(isRecord) {
 
     // localStorage.setItem('bestName', bestName);
     // document.querySelector('.test').innerHTML = localStorage.getItem('bestName');
+
+    localStorage.setItem(gLevel.name + 'Name', bestName);
+    localStorage.setItem(gLevel.name + 'Time', isRecord);
 
     gBestScores[gLevel.name] = [];
     gBestScores[gLevel.name][0] = bestName;
