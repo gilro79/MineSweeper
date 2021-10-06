@@ -9,51 +9,55 @@
 
 <body onload="initGame()">
     <h1>Mine Sweeper</h1>
-    <div class="level">
-        <input type="radio" id="Beginner" name="MS" value="Beginner" checked onclick="gameLevel(this)">
-        <label for="Beginner">Beginner</label>
-        <input type="radio" id="medium" onclick="gameLevel(this)" name="MS" value="medium">
-        <label for="medium">Medium</label>
-        <input type="radio" id="Expert" onclick="gameLevel(this)" name="MS" value="Expert">
-        <label for="Expert">Expert</label>
-    </div>
-    <div class="frame">
-        <div class="frameHeader">
-            <div class="gameTime">time: 0</div>
-            <div class="liveLeft"><span>3 LIVES</span> LEFT</div>
+    <div class="game-area">
+        <div class="level">
+            <input type="radio" id="Beginner" name="MS" value="Beginner" checked onclick="gameLevel(this)">
+            <label for="Beginner">Beginner</label>
+            <input type="radio" id="medium" onclick="gameLevel(this)" name="MS" value="medium">
+            <label for="medium">Medium</label>
+            <input type="radio" id="Expert" onclick="gameLevel(this)" name="MS" value="Expert">
+            <label for="Expert">Expert</label>
         </div>
-        <button class="resetBtn" onclick="initGame()" title="Reset Button">🙂</button>
-        <table>
-            <tbody class="board"></tbody>
-        </table>
-        <div class="hints" onclick="getHint()" title="Click me to see what's underneath nine cells!">HINTS
-            <span class="hint1"> 💡</span>
-            <span class="hint2"> 💡</span>
-            <span class="hint3"> 💡</span>
+        <div class="frame">
+            <div class="frameHeader">
+                <div class="gameTime">time: 0</div>
+                <div class="markedMines">Mines: <span>2</span></div>
+                <div class="liveLeft"><span>3 LIVES</span> LEFT</div>
+            </div>
+            <button class="resetBtn" onclick="resetGame()" title="Reset Button">🙂</button>
+            <table>
+                <tbody class="board"></tbody>
+            </table>
+            <div class="hints" onclick="getHint()" title="Click me to see what's underneath nine cells!">HINTS
+                <span class="hint1"> 💡</span>
+                <span class="hint2"> 💡</span>
+                <span class="hint3"> 💡</span>
+            </div>
+            <div class="safe-click" onclick="safeClick()" title="Click me and I will show you a safe haven!">Safe Click
+                <span class="click1"> ❕</span>
+                <span class="click2"> ❕</span>
+                <span class="click3"> ❕</span>
+            </div>
+            <div class="manual-mode" onclick="setMinesManual()" title="Click me to set your own mines!">Manual Mines
+                (<span class="mine-number">2</span>)</div>
         </div>
-        <div class="safe-click" onclick="safeClick()" title="Click me and I will show you a safe haven!">Safe Click
-            <span class="click1"> ❕</span>
-            <span class="click2"> ❕</span>
-            <span class="click3"> ❕</span>
-        </div>
-        <div class="manual-mode" onclick="setMinesManual()" title="Click me to set your own mines!">Manual Mines (<span class="mine-number">2</span>)</div>
     </div>
     <div class="records">
         <b>records table:</b><br><br>
         Beginner:<br>
-        name: <span class="size-begginer-record-name">NA</span>, 
+        name: <span class="size-begginer-record-name">NA</span>,
         time: <span class="size-begginer-record-time">NA</span> sec
         <br>
         <hr>
         <br>
         medium:<br>
-        name: <span class="size-medium-record-name">NA</span>, 
+        name: <span class="size-medium-record-name">NA</span>,
         time: <span class="size-medium-record-time">NA</span> sec
         <br>
         <hr>
         <br>
         Expert:<br>
-        name: <span class="size-expert-record-name">NA</span>, 
+        name: <span class="size-expert-record-name">NA</span>,
         time: <span class="size-expert-record-time">NA</span> sec
         <hr>
     </div>

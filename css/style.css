@@ -1,26 +1,47 @@
+
 body {
-    background-color: black;
+    background-image: url("/img/stars.gif");
+    background-size: cover;
+    /* background-color: black; */
     color: white;
     text-align: center;
 }
+.game-area{
+    background-color: #292d34;
+    width: fit-content;
+    margin: auto;
+    margin-bottom:  20px;
+    padding: 20px;
+    border-radius: 30px;
+}
 table {
     margin: auto;
+    margin-bottom: 30px;
     cursor: default;
+    border: 4px solid rgb(112, 112, 112);
+    background-color: rgb(85, 85, 85);
 }
 
 td {
     width:20px;
     height:20px;
     text-align: center;
-    background-color: gray;
+    /* background-color: gray; */
+    border: 2px solid rgb(122, 122, 122);
+    background-color: rgb(160, 160, 160);
 }
+/* td:active {
+    background-color: rgb(190, 190, 190);
+    
+} */
 
 .mine {
-    background-color: red;
+    background-color: rgb(201, 113, 12);
 }
 
 .shown{
-    background-color: rgb(160, 160, 160);
+    background-color: gray;
+    /* background-color: rgb(160, 160, 160); */
 }
 
 img {
@@ -31,18 +52,37 @@ img {
     margin: 20px;
 }
 .level{
-    margin: 20px;
+    margin-bottom: 20px;
+    margin: auto;
+    border-radius: 20px;
+    background-color: gray;
+    padding: 10px 100px;
+    width: fit-content;
 }
 .gameTime{
     display: inline-block;
     margin-right: 40px;
-    /* padding: 3px;
+    padding: 10px 40px;
     width: 60px;
+    border-radius: 10px;
     background-color: rgb(218, 218, 218);
-    color: rgb(41, 58, 207); */
+    color: rgb(41, 58, 207);
+}
+.markedMines{
+    display: inline-block;
+    margin-right: 40px;
+    padding: 10px 40px;
+    width: fit-content;
+    border-radius: 10px;
+    background-color: blue;
 }
 .liveLeft{
     display: inline-block;
+    margin-right: 40px;
+    padding: 10px 40px;
+    width: fit-content;
+    border-radius: 10px;
+    background-color: coral;
 
 }
 .resetBtn{
@@ -65,12 +105,12 @@ img {
     padding: 10px;
 }
 .hints{
+    display: inline-block;
     cursor: default;
-    margin: auto;
-    margin-top: 20px;
+    margin: 20px 20px;
     background-color: rgba(128, 255, 0, 0.466);
     width: 150px;
-    padding: 4px;
+    padding: 10px 20px;
     border-radius: 10px;
 }
 .hints:hover{
@@ -79,12 +119,13 @@ img {
 
 }
 .safe-click{
+    display: inline-block;
     cursor: default;
-    margin: auto;
+    margin-right: 20px;
     margin-top: 20px;
     background-color: rgba(109, 128, 241, 0.466);
     width: 150px;
-    padding: 4px;
+    padding: 10px 20px;
     border-radius: 10px;
 }
 .safe-click:hover{
@@ -93,12 +134,13 @@ img {
 }
 
 .manual-mode{
+    display: inline-block;
     cursor: default;
     margin: auto;
     margin-top: 20px;
     background-color: rgba(230, 11, 11, 0.815);
     width: 150px;
-    padding: 4px;
+    padding: 10px 20px;
     border-radius: 10px;
 }
 .manual-mode:hover{
